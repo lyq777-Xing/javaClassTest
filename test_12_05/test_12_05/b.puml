@@ -1,0 +1,18 @@
+@startuml
+class MainTest {
++ {static} void main(String[])
+}
+abstract class Instrument {
++ void play()
+}
+class Piano {
++ void play()
+}
+class Violin {
++ void play()
+}
+
+
+Instrument <|-- Piano
+Instrument <|-- Violin
+@enduml

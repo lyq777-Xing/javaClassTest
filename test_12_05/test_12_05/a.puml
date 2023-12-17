@@ -1,0 +1,30 @@
+@startuml
+class EmployeeTest {
++ {static} void main(String[])
+}
+class Employee {
+- String id
+- String work
++ String getId()
++ void setId(String)
++ String getWork()
++ void setWork(String)
++ String toString()
+}
+class Engineer {
+- int level
++ int getLevel()
++ void setLevel(int)
++ String toString()
+}
+class Scientists {
+- String field
++ String getField()
++ void setField(String)
++ String toString()
+}
+
+
+Employee <|-- Engineer
+Employee <|-- Scientists
+@enduml

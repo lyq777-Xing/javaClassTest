@@ -1,0 +1,21 @@
+@startuml
+Employee --> Company
+class Employee {
+- String code
+- String name
+- Company company
++ String getCode()
++ void setCode(String)
++ String getName()
++ void setName(String)
++ Company getCompany()
++ void setCompany(Company)
++ String toString()
+}
+class Company {
+- String name
+- String address
++ void setAddress(String)
++ String toString()
+}
+@enduml
