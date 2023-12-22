@@ -1,0 +1,38 @@
+@startuml
+class PACKAGE_NAME.CourseSchedule {
+}
+class CourseTest {
++ {static} void main(String[])
+}
+class Course {
+- String name
+- String courseId
+- String teacherName
++ String getName()
++ void setName(String)
++ String getCourseId()
++ void setCourseId(String)
++ String getTeacherName()
++ void setTeacherName(String)
++ String toString()
+}
+class CourseScheduleTest {
++ {static} void main(String[])
+}
+class CourseSchedule {
+- String userCode
+- ArrayList<Course> courses
++ String getUserCode()
++ void setUserCode(String)
++ ArrayList<Course> getCourses()
++ void setCourses(ArrayList<Course>)
++ void add(Course)
++ void delete(Course)
++ ArrayList<Course> queryByKey(String)
++ String toString()
++ boolean equals(Object)
++ int hashCode()
+}
+class PACKAGE_NAME.Course {
+}
+@enduml

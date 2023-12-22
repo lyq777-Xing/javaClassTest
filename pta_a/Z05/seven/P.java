@@ -1,9 +1,9 @@
 package Z05.seven;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
+
+import static java.lang.System.exit;
 
 /**
  * @author lyq
@@ -19,28 +19,124 @@ public class P {
                 String name = sc.next();
                 int age = sc.nextInt();
                 boolean gender = sc.nextBoolean();
-                String stuNo = sc.next();
+                String stuNol = sc.next();
                 String clazz = sc.next();
-                if(name.equals("null") || stuNo.equals("null") || clazz.equals("null")){
+//                if(! (name.equals("null") || stuNol.equals("null") || clazz.equals("null") ) ){
+                    Student student = new Student( name,  age,  gender,  stuNol,  clazz);
+                    people.add(student);
+//                }
 
-                }
-//                Student student = new Student();
-//                people.add(student);
             } else if (s.equals("e")) {
-                Employee employee = new Employee(sc.next(), sc.nextInt(), sc.nextBoolean(),sc.nextDouble(), new Company(sc.next()));
-                people.add(employee);
+//                String name, int age, boolean gender, double salary, Company company
+                String name = sc.next();
+                int age = sc.nextInt();
+                boolean gender = sc.nextBoolean();
+                double salary = sc.nextDouble();
+                String company = sc.next();
+//                if(! (name.equals("null") ) ){
+                    Company company1 = new Company(company);
+                    Employee employee = new Employee( name,  age,  gender,  salary,  company1);
+                    people.add(employee);
+//                }
             }else {
                 break;
             }
         }
+        people.sort(new Comparator<Person>() {
+            @Override
+            public int compare(Person o1, Person o2) {
+                if(o1.getName().equals(o2.getName())){
+                    if (o1.getAge() == o2.getAge()){
+                        return 0;
+                    }
+                    return o1.getAge() > o2.getAge() ? 1 : -1;
+                }else {
+                    return o1.getName().compareTo(o2.getName());
+                }
+            }
+        });
 
+        for (Person p :
+                people) {
+            System.out.println(p);
+        }
+
+        String next = sc.next();
+        if(next.equals("exit") || next.equals("return")){
+            exit(1);
+        }else {
+            ArrayList<Student> stuList = new ArrayList<>();
+            ArrayList<Employee> empList = new ArrayList<>();
+            for (Person p :
+                    people) {
+                if (p.getClass() == Student.class){
+                    int f = 0;
+                    for (Student s :
+                            stuList) {
+                        if(s.equals(p)){
+                            f = 1;
+                            break;
+                        }
+                    }
+                    if(f == 0){
+                        stuList.add((Student) p);
+                    }
+                }else {
+                    int f = 0;
+                    for (Employee e :
+                            empList) {
+                        if (e.equals(p)) {
+                            f = 1;
+                            break;
+                        }
+                    }
+                    if(f == 0){
+                        empList.add((Employee) p);
+                    }
+                }
+            }
+            System.out.println("stuList");
+            for (Student s :
+                    stuList) {
+                System.out.println(s);
+            }
+            System.out.println("empList");
+            for (Employee e :
+                    empList) {
+                System.out.println(e);
+            }
+        }
     }
 
 }
-abstract class Person{
+class Person{
     private String name;
     private int age;
     private boolean gender;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public boolean isGender() {
+        return gender;
+    }
+
+    public void setGender(boolean gender) {
+        this.gender = gender;
+    }
 
     public Person(String name, int age, boolean gender) {
         this.name = name;
@@ -79,7 +175,7 @@ class Student extends Person{
 
     @Override
     public String toString() {
-        return super.toString() + "-" + stuNol + "-" + clazz;
+        return "Student:" + super.toString() + "-" + stuNol + "-" + clazz;
     }
 
     @Override
@@ -138,7 +234,7 @@ class Employee extends Person{
 
     @Override
     public String toString() {
-        return super.toString() + "-" + company + "-" + salary;
+        return "Employee:" + super.toString() + "-" + company + "-" + salary;
     }
 
     @Override
